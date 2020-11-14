@@ -1,0 +1,17 @@
+AddDefaultCharset UTF-8
+RewriteEngine On
+
+php_value register_globals 0
+
+RewriteCond %{HTTP_HOST} ^www.shop.ru$ [NC]
+RewriteRule ^(.*)$ http://shop.ru/$1 [R=301,L]
+
+RewriteBase /
+RewriteCond %{REQUEST_URI} .+/$ [NC]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)(/)$ $1 [L,R=301]
+
+Options +FollowSymlinks
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*) /?%{QUERY_STRING}
